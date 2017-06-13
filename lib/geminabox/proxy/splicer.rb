@@ -12,6 +12,7 @@ module Geminabox
       end
 
       def create
+        return nil unless necessary?
         if data = new_content
           f = Tempfile.create('geminabox')
           begin
@@ -56,6 +57,15 @@ module Geminabox
       end
 
       private
+
+      def necessary?
+        if proxy_file_exists?
+          return Time.now - File.mtime(proxy_path) > 3600
+        else
+          true
+        end
+      end
+
       def merge_gziped_content
         if rc = remote_content
           package(unpackage(local_content) | unpackage(rc))
