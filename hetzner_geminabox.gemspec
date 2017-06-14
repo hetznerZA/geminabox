@@ -1,7 +1,7 @@
 require File.expand_path('../lib/geminabox/version', __FILE__)
 
 Gem::Specification.new do |s|
-  s.name              = 'geminabox'
+  s.name              = 'hetzner_geminabox'
   s.version           = Geminabox::VERSION
   s.summary           = 'Really simple rubygem hosting'
   s.description       = 'A sinatra based gem hosting app, with client side gem push style functionality.'
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files             = %w[MIT-LICENSE README.md] + Dir['{lib,public,views}/**/*']
   s.require_paths     = ['lib']
 
-  s.add_dependency('sinatra', [">= 1.2.7"])
+  s.add_dependency('sinatra', ["= 1.2.7"])
   s.add_dependency('builder')
   s.add_dependency('httpclient', [">= 2.2.7"])
   s.add_dependency('nesty')

@@ -1,3 +1,3 @@
 module Geminabox
-  VERSION = '0.13.5' unless defined? VERSION
+  VERSION = '0.13.7' unless defined? VERSION
 end
