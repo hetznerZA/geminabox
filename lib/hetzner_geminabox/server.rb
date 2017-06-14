@@ -56,7 +56,7 @@ module HetznerGeminabox
           dependency_cache.flush
         else
           begin
-            require 'geminabox/indexer'
+            require 'hetzner_geminabox/indexer'
             updated_gemspecs = HetznerGeminabox::Indexer.updated_gemspecs(indexer)
             return if updated_gemspecs.empty?
             HetznerGeminabox::Indexer.patch_rubygems_update_index_pre_1_8_25(indexer)
