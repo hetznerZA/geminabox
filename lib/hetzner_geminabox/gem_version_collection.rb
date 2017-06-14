@@ -1,11 +1,11 @@
-module Geminabox
+module HetznerGeminabox
 
-  # This class represents a sorted collection of Geminabox::GemVersion objects.
+  # This class represents a sorted collection of HetznerGeminabox::GemVersion objects.
   # It it used widely throughout the system for displaying and filtering gems.
   class GemVersionCollection
     include Enumerable
 
-    # Array of Geminabox::GemVersion objects, or an array of [name, version,
+    # Array of HetznerGeminabox::GemVersion objects, or an array of [name, version,
     # platform] triples.
     def initialize(initial_gems=[])
       @gems = initial_gems.map{|object|
@@ -40,7 +40,7 @@ module Geminabox
     # yields 'foo_gem', version_collection
     def by_name(&block)
       @grouped ||= @gems.group_by(&:name).map{|name, collection|
-        [name, Geminabox::GemVersionCollection.new(collection)]
+        [name, HetznerGeminabox::GemVersionCollection.new(collection)]
       }.sort_by{|name, collection|
         name.downcase
       }
@@ -54,10 +54,10 @@ module Geminabox
 
   private
     def coerce_to_gem_version(object)
-      if object.is_a?(Geminabox::GemVersion)
+      if object.is_a?(HetznerGeminabox::GemVersion)
         object
       else
-        Geminabox::GemVersion.new(*object)
+        HetznerGeminabox::GemVersion.new(*object)
       end
     end
   end

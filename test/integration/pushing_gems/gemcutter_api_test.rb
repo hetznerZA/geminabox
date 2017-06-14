@@ -1,5 +1,5 @@
 require_relative '../../test_helper'
 
-class GemcutterApiTest < Geminabox::TestCase
+class GemcutterApiTest < HetznerGeminabox::TestCase
   should_push_gem_over_gemcutter_api
 end

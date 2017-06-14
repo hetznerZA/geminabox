@@ -1,6 +1,6 @@
 require 'faraday'
 
-module Geminabox
+module HetznerGeminabox
 
   class TemplateFaradayAdapter < HttpAdapter
 

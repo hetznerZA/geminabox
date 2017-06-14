@@ -2,7 +2,7 @@ require_relative '../../test_helper'
 require 'httpclient'
 require 'set'
 
-class DependenciesApiJavaTest < Geminabox::TestCase
+class DependenciesApiJavaTest < HetznerGeminabox::TestCase
   test "push a java gem with dependencies" do
     cache_fixture_data_dir "a_java_gem_with_deps" do
       assert_can_push(:a_java,

@@ -11,7 +11,7 @@ require 'logger'
 require 'rack/auth/abstract/handler'
 require 'rack/auth/abstract/request'
 
-class Geminabox::TestCase < Minitest::Test
+class HetznerGeminabox::TestCase < Minitest::Test
   class << self
     # DSL
     def url(url = nil)
@@ -35,7 +35,7 @@ class Geminabox::TestCase < Minitest::Test
     end
 
     def app(&block)
-      @app = block || @app || lambda{|builder| run Geminabox::Server }
+      @app = block || @app || lambda{|builder| run HetznerGeminabox::Server }
     end
 
     def to_app
@@ -121,7 +121,7 @@ class Geminabox::TestCase < Minitest::Test
   end
 
   def gemcutter_push(gemfile)
-    Geminabox::TestCase.setup_fake_home!
+    HetznerGeminabox::TestCase.setup_fake_home!
     fix_fixture_permissions!
     home = FIXTURES_PATH.join('fake_home_path')
     command = "GEM_HOME=#{FAKE_HOME} HOME=#{home} gem push #{gemfile} --host '#{config.url_with_port(@test_server_port)}' 2>&1"
@@ -129,7 +129,7 @@ class Geminabox::TestCase < Minitest::Test
   end
 
   def geminabox_push(gemfile)
-    Geminabox::TestCase.setup_fake_home!
+    HetznerGeminabox::TestCase.setup_fake_home!
     command = "GEM_HOME=#{FAKE_HOME} gem inabox #{gemfile} -g '#{config.url_with_port(@test_server_port)}' 2>&1"
     execute(command)
   end
@@ -190,7 +190,7 @@ class Geminabox::TestCase < Minitest::Test
 
     @app_server = fork do
       begin
-        Geminabox.data = config.data
+        HetznerGeminabox.data = config.data
         STDERR.reopen("/dev/null")
         STDOUT.reopen("/dev/null")
         Rack::Server.start(server_options)

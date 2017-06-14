@@ -1,7 +1,7 @@
 require 'tempfile'
 require 'fileutils'
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     class Splicer < FileHandler
 
@@ -14,7 +14,7 @@ module Geminabox
       def create
         return nil unless necessary?
         if data = new_content
-          f = Tempfile.create('geminabox')
+          f = Tempfile.new('geminabox')
           begin
             f.write(data)
           ensure

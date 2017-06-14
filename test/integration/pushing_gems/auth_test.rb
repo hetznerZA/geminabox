@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-class AuthTest < Geminabox::TestCase
+class AuthTest < HetznerGeminabox::TestCase
   url "http://foo:bar@localhost/"
 
   app do
@@ -8,7 +8,7 @@ class AuthTest < Geminabox::TestCase
       username == "foo" and password == "bar"
     end
 
-    run Geminabox::Server
+    run HetznerGeminabox::Server
   end
 
   should_push_gem

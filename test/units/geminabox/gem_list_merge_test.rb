@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
   class GemListMergeTest < Minitest::Test
 
     def test_merge

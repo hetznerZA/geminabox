@@ -1,5 +1,5 @@
 require_relative '../../test_helper'
 
-class BasicTest < Geminabox::TestCase
+class BasicTest < HetznerGeminabox::TestCase
   should_push_gem
 end

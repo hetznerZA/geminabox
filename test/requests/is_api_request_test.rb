@@ -9,12 +9,12 @@ class IsApiRequestTest < Minitest::Test
     clean_data_dir
 
     silence do
-      Gem::Indexer.new(Geminabox.data).generate_index
+      Gem::Indexer.new(HetznerGeminabox.data).generate_index
     end
   end
 
   def app
-    Geminabox::Server
+    HetznerGeminabox::Server
   end
 
   test "test upload via web interface" do

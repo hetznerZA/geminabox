@@ -35,7 +35,7 @@ class Gem::Commands::InaboxCommand < Gem::Command
 
   def last_minute_requires!
     require 'yaml'
-    require File.expand_path("../../../geminabox_client.rb", __FILE__)
+    require File.expand_path("../../../hetzner_geminabox_client.rb", __FILE__)
   end
 
   def execute
@@ -45,7 +45,7 @@ class Gem::Commands::InaboxCommand < Gem::Command
 
     if options[:args].size == 0
       say "You didn't specify a gem, looking for one in . and in ./pkg/..."
-      gemfiles = [GeminaboxClient::GemLocator.find_gem(Dir.pwd)]
+      gemfiles = [HetznerGeminaboxClient::GemLocator.find_gem(Dir.pwd)]
     else
       gemfiles = get_all_gem_names
     end
@@ -54,13 +54,13 @@ class Gem::Commands::InaboxCommand < Gem::Command
   end
 
   def send_gems(gemfiles)
-    client = GeminaboxClient.new(geminabox_host)
+    client = HetznerGeminaboxClient.new(geminabox_host)
 
     gemfiles.each do |gemfile|
       say "Pushing #{File.basename(gemfile)} to #{client.url}..."
       begin
         say client.push(gemfile, options)
-      rescue GeminaboxClient::Error => e
+      rescue HetznerGeminaboxClient::Error => e
         alert_error e.message
         terminate_interaction(1)
       end

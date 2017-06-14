@@ -1,6 +1,6 @@
 require_relative '../../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     class FileHandlerTest < Minitest::Test
 
@@ -9,7 +9,7 @@ module Geminabox
       end
 
       def teardown
-        Geminabox.http_adapter = HttpClientAdapter.new
+        HetznerGeminabox.http_adapter = HttpClientAdapter.new
       end
 
       def test_with_no_files_in_place
@@ -38,7 +38,7 @@ module Geminabox
       def test_remote_content_with_alternative_http_adapter
         @http_dummy = HttpDummy.new
         @http_dummy.default_response = remote_content
-        Geminabox.http_adapter = @http_dummy
+        HetznerGeminabox.http_adapter = @http_dummy
         assert_equal remote_content, file_handler.remote_content
       end
       

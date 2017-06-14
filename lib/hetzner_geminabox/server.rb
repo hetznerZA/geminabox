@@ -1,10 +1,10 @@
-module Geminabox
+module HetznerGeminabox
 
   class Server < Sinatra::Base
     enable :static, :methodoverride
 
     def self.delegate_to_geminabox(*delegate_methods)
-      delegate_methods.each{|m| set m, Geminabox.send(m)}
+      delegate_methods.each{|m| set m, HetznerGeminabox.send(m)}
     end
 
     delegate_to_geminabox(
@@ -57,9 +57,9 @@ module Geminabox
         else
           begin
             require 'geminabox/indexer'
-            updated_gemspecs = Geminabox::Indexer.updated_gemspecs(indexer)
+            updated_gemspecs = HetznerGeminabox::Indexer.updated_gemspecs(indexer)
             return if updated_gemspecs.empty?
-            Geminabox::Indexer.patch_rubygems_update_index_pre_1_8_25(indexer)
+            HetznerGeminabox::Indexer.patch_rubygems_update_index_pre_1_8_25(indexer)
             indexer.update_index
             updated_gemspecs.each { |gem| dependency_cache.flush_key(gem.name) }
           rescue Errno::ENOENT
@@ -78,14 +78,14 @@ module Geminabox
       end
 
       def dependency_cache
-        @dependency_cache ||= Geminabox::DiskCache.new(File.join(data, "_cache"))
+        @dependency_cache ||= HetznerGeminabox::DiskCache.new(File.join(data, "_cache"))
       end
     end
 
 
 
     before do
-      headers 'X-Powered-By' => "geminabox #{Geminabox::VERSION}"
+      headers 'X-Powered-By' => "geminabox #{HetznerGeminabox::VERSION}"
     end
 
     get '/' do
@@ -156,7 +156,7 @@ module Geminabox
 
       if params[:file] && params[:file][:filename] && (tmpfile = params[:file][:tempfile])
         serialize_update do
-          handle_incoming_gem(Geminabox::IncomingGem.new(tmpfile))
+          handle_incoming_gem(HetznerGeminabox::IncomingGem.new(tmpfile))
         end
       else
         @error = "No file selected"
@@ -171,7 +171,7 @@ module Geminabox
 
       begin
         serialize_update do
-          handle_incoming_gem(Geminabox::IncomingGem.new(request.body))
+          handle_incoming_gem(HetznerGeminabox::IncomingGem.new(request.body))
         end
       rescue Object => o
         File.open "/tmp/debug.txt", "a" do |io|
@@ -269,7 +269,7 @@ HTML
     end
 
     def load_gems
-      @loaded_gems ||= Geminabox::GemVersionCollection.new(all_gems)
+      @loaded_gems ||= HetznerGeminabox::GemVersionCollection.new(all_gems)
     end
 
     def index_gems(gems)

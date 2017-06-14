@@ -1,7 +1,7 @@
 require_relative '../../test_helper'
-module Geminabox
+module HetznerGeminabox
   class GemVersionCollectionTest < Minitest::Test
-    GIB = Geminabox
+    GIB = HetznerGeminabox
     def test_it_coerces_things_to_gem_versions
       expected = GIB::GemVersion.new('foo', '1.2.3', 'ruby')
       actual = GIB::GemVersionCollection.new([['foo', '1.2.3', 'ruby']]).oldest

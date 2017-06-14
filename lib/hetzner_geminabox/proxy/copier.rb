@@ -1,6 +1,6 @@
 
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     class Copier < FileHandler
 

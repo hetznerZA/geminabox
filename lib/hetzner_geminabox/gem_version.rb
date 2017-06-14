@@ -1,4 +1,4 @@
-module Geminabox
+module HetznerGeminabox
 
   class GemVersion
     attr_accessor :name, :number, :platform

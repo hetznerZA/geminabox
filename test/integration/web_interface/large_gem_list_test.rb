@@ -2,11 +2,11 @@ require_relative '../../test_helper'
 require 'minitest/unit'
 require 'rack/test'
 
-class LargeGemListSpec < Geminabox::TestCase
+class LargeGemListSpec < HetznerGeminabox::TestCase
   include Capybara::DSL
 
   test "more than 5 versions of the same gem" do
-    Capybara.app = Geminabox::TestCase.app
+    Capybara.app = HetznerGeminabox::TestCase.app
     cache_fixture_data_dir('large_gem_list_test') do
       assert_can_push(:unrelated_gem, :version => '1.0')
 

@@ -1,6 +1,6 @@
 require 'sinatra/base'
 
-module Geminabox
+module HetznerGeminabox
 
   class Hostess < Sinatra::Base
     def serve

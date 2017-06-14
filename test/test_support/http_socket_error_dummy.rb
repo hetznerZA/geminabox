@@ -1,4 +1,4 @@
-module Geminabox
+module HetznerGeminabox
   class HttpSocketErrorDummy < HttpAdapter
 
     attr_accessor :default_response

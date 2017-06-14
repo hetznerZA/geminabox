@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
   class ServerTest < Minitest::Test
     class FileOpenNoYield
       attr_reader :name, :mode, :block, :mock_file
@@ -28,7 +28,7 @@ module Geminabox
       attr_reader :server, :fake_file_class, :mock_file
 
       def prep_server(klass, flock_return = nil)
-        @server = Geminabox::Server.new.instance_variable_get(:@instance)
+        @server = HetznerGeminabox::Server.new.instance_variable_get(:@instance)
         # ivar for the tests.  Local variable for the define_method.  <sigh>
         fake_file_class = @fake_file_class = klass.new(flock_return)
         server.singleton_class.send(:define_method, :file_class){ fake_file_class }
@@ -37,8 +37,8 @@ module Geminabox
     end
 
     def teardown
-      Geminabox.http_adapter = HttpClientAdapter.new
-      Geminabox.allow_remote_failure = false
+      HetznerGeminabox.http_adapter = HttpClientAdapter.new
+      HetznerGeminabox.allow_remote_failure = false
     end
 
     describe "#with_lock" do
@@ -68,7 +68,7 @@ module Geminabox
       def test_it_calls_File_open_with_correct_args
         prep_server(FileOpenNoYield)
         do_call
-        assert_equal Geminabox.settings.lockfile, fake_file_class.name
+        assert_equal HetznerGeminabox.settings.lockfile, fake_file_class.name
         assert_equal File::RDWR | File::CREAT, fake_file_class.mode
       end
     end
@@ -77,7 +77,7 @@ module Geminabox
       include PrepServer
 
       before do
-        @server = Geminabox::Server.new.instance_variable_get(:@instance)
+        @server = HetznerGeminabox::Server.new.instance_variable_get(:@instance)
         def @server.args
           @args
         end
@@ -105,7 +105,7 @@ module Geminabox
         @server.send(:serialize_update){}
         expected_args = [
           503,
-          {'Retry-After' => Geminabox.settings.retry_interval},
+          {'Retry-After' => HetznerGeminabox.settings.retry_interval},
           'Repository lock is held by another process'
         ]
         assert_equal expected_args, @server.args

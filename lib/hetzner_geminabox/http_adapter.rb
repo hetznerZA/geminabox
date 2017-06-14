@@ -1,6 +1,6 @@
 require_relative 'http_adapter_config_error'
 
-module Geminabox
+module HetznerGeminabox
   class HttpAdapter
 
     def get_content(*args)

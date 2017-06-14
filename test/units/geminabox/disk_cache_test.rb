@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
 
   class DiskCacheTest < Minitest::Test
     DIR = "/tmp/geminabox-disk-cache-test"
@@ -9,7 +9,7 @@ module Geminabox
     end
 
     def subject
-      @subject ||= Geminabox::DiskCache.new(DIR)
+      @subject ||= HetznerGeminabox::DiskCache.new(DIR)
     end
 
     def test_cache_some_stuff

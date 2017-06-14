@@ -1,7 +1,7 @@
-module Geminabox
+module HetznerGeminabox
 
   class IncomingGem
-    def initialize(gem_data, root_path = Geminabox.data)
+    def initialize(gem_data, root_path = HetznerGeminabox.data)
       unless gem_data.respond_to? :read
         raise ArgumentError, "Expected an instance of IO"
       end

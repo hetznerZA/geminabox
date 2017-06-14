@@ -1,6 +1,6 @@
 require_relative '../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
   class HttpAdapterTest < Minitest::Test
     def http_adapter
       @http_handler ||= HttpAdapter.new
@@ -31,7 +31,7 @@ module Geminabox
     end
 
     def test_default_geminabox_http_adapter
-      assert_kind_of HttpClientAdapter, Geminabox.http_adapter
+      assert_kind_of HttpClientAdapter, HetznerGeminabox.http_adapter
     end
   end
 end

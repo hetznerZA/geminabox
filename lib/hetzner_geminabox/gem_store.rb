@@ -1,4 +1,4 @@
-module Geminabox
+module HetznerGeminabox
 
   class GemStore
     attr_accessor :gem, :overwrite
@@ -23,17 +23,17 @@ module Geminabox
     def prepare_data_folders
       ensure_existing_data_folder_compatible
       begin
-        FileUtils.mkdir_p(File.join(Geminabox.data, "gems"))
+        FileUtils.mkdir_p(File.join(HetznerGeminabox.data, "gems"))
       rescue
         raise GemStoreError.new(
           500,
-          "Could not create #{File.expand_path(Geminabox.data)}."
+          "Could not create #{File.expand_path(HetznerGeminabox.data)}."
         )
       end
     end
 
     def check_replacement_status
-      if !overwrite and Geminabox::Server.disallow_replace? and File.exist?(gem.dest_filename)
+      if !overwrite and HetznerGeminabox::Server.disallow_replace? and File.exist?(gem.dest_filename)
         if existing_file_digest != gem.hexdigest
           raise GemStoreError.new(409, "Updating an existing gem is not permitted.\nYou should either delete the existing version, or change your version number.")
         else
@@ -48,7 +48,7 @@ module Geminabox
 
     private
     def ensure_existing_data_folder_compatible
-      if File.exist? Geminabox.data
+      if File.exist? HetznerGeminabox.data
         ensure_data_folder_is_directory
         ensure_data_folder_is_writable
       end
@@ -57,15 +57,15 @@ module Geminabox
     def ensure_data_folder_is_directory
       raise GemStoreError.new(
         500,
-        "Please ensure #{File.expand_path(Geminabox.data)} is a directory."
-      ) unless File.directory? Geminabox.data
+        "Please ensure #{File.expand_path(HetznerGeminabox.data)} is a directory."
+      ) unless File.directory? HetznerGeminabox.data
     end
 
     def ensure_data_folder_is_writable
       raise GemStoreError.new(
         500,
-        "Please ensure #{File.expand_path(Geminabox.data)} is writable by the geminabox web server."
-      ) unless File.writable? Geminabox.data
+        "Please ensure #{File.expand_path(HetznerGeminabox.data)} is writable by the geminabox web server."
+      ) unless File.writable? HetznerGeminabox.data
     end
 
     def existing_file_digest
@@ -79,19 +79,19 @@ module Geminabox
           f << blk
         end
       end
-      Geminabox::Server.reindex
+      HetznerGeminabox::Server.reindex
     end
 
     # based on http://as.rubyonrails.org/classes/File.html
     def atomic_write(file_name)
-      temp_dir = File.join(Geminabox.data, "_temp")
+      temp_dir = File.join(HetznerGeminabox.data, "_temp")
       FileUtils.mkdir_p(temp_dir)
       temp_file = Tempfile.new("." + File.basename(file_name), temp_dir)
       temp_file.binmode
       yield temp_file
       temp_file.close
       File.rename(temp_file.path, file_name)
-      File.chmod(Geminabox::Server.gem_permissions, file_name)
+      File.chmod(HetznerGeminabox::Server.gem_permissions, file_name)
     end
 
   end

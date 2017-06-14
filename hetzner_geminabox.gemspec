@@ -1,8 +1,8 @@
-require File.expand_path('../lib/geminabox/version', __FILE__)
+require File.expand_path('../lib/hetzner_geminabox/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name              = 'hetzner_geminabox'
-  s.version           = Geminabox::VERSION
+  s.version           = HetznerGeminabox::VERSION
   s.summary           = 'Really simple rubygem hosting'
   s.description       = 'A sinatra based gem hosting app, with client side gem push style functionality.'
   s.authors           = ['Tom Lea', 'Jack Foy', 'Rob Nichols', 'Naotoshi Seo']

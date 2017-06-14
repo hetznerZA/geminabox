@@ -1,5 +1,5 @@
 require_relative '../../test_helper'
-module Geminabox
+module HetznerGeminabox
   class GemStoreErrorTest < Minitest::Test
     def test_error
       reason = "This message"

@@ -15,7 +15,7 @@ module WithTmpReadonly
   end
 end
 
-class InvalidDataDirTest < Geminabox::TestCase
+class InvalidDataDirTest < HetznerGeminabox::TestCase
   data "/dev/null"
 
   test "report the error back to the user" do
@@ -23,7 +23,7 @@ class InvalidDataDirTest < Geminabox::TestCase
   end
 end
 
-class UnwritableDataDirTest < Geminabox::TestCase
+class UnwritableDataDirTest < HetznerGeminabox::TestCase
   include WithTmpReadonly
 
   data "/tmp/read_only"
@@ -33,7 +33,7 @@ class UnwritableDataDirTest < Geminabox::TestCase
   end
 end
 
-class UnwritableUncreatableDataDirTest < Geminabox::TestCase
+class UnwritableUncreatableDataDirTest < HetznerGeminabox::TestCase
   include WithTmpReadonly
 
   data "/tmp/read_only/geminabox-fail"
@@ -43,7 +43,7 @@ class UnwritableUncreatableDataDirTest < Geminabox::TestCase
   end
 end
 
-class WritableNoneExistentDataDirTest < Geminabox::TestCase
+class WritableNoneExistentDataDirTest < HetznerGeminabox::TestCase
   data "#{data}/more/layers/of/dirs"
 
   test "create the data dir" do

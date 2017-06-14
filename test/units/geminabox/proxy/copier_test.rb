@@ -1,7 +1,7 @@
 require_relative '../../../test_helper'
 require 'minitest/mock'
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     class CopierTest < Minitest::Test
 

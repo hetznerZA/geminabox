@@ -1,5 +1,5 @@
 require 'nesty'
-module Geminabox
+module HetznerGeminabox
   class GemStoreError < StandardError
     attr_reader :code, :reason
 

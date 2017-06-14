@@ -1,6 +1,6 @@
 require_relative '../../../test_helper'
 
-module Geminabox
+module HetznerGeminabox
   class HttpClientAdapterTest < Minitest::Test
 
     def setup

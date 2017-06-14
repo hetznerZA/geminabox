@@ -1,12 +1,12 @@
 require 'uri'
 require 'geminabox'
 
-class GeminaboxClient
+class HetznerGeminaboxClient
   attr_reader :url, :http_client
 
   def initialize(url)
     extract_username_and_password_from_url!(url)
-    @http_client = Geminabox.http_adapter
+    @http_client = HetznerGeminabox.http_adapter
     @http_client.set_auth(url_for(:upload), @username, @password) 
   end
 
@@ -28,16 +28,16 @@ class GeminaboxClient
     if response.status < 300
       response.body
     else
-      raise GeminaboxClient::Error, "Error (#{response.status} received)\n\n#{response.body}"
+      raise HetznerGeminaboxClient::Error, "Error (#{response.status} received)\n\n#{response.body}"
     end
   end
 
 end
 
-class GeminaboxClient::Error < RuntimeError
+class HetznerGeminaboxClient::Error < RuntimeError
 end
 
-module GeminaboxClient::GemLocator
+module HetznerGeminaboxClient::GemLocator
   def find_gem(dir)
     gemname = File.split(dir).last
     glob_matcher = "{pkg/,}#{gemname}-*.gem"

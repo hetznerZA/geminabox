@@ -1,6 +1,6 @@
 require "fileutils"
-module Geminabox
-  class Geminabox::DiskCache
+module HetznerGeminabox
+  class HetznerGeminabox::DiskCache
     attr_reader :root_path
 
     def initialize(root_path)

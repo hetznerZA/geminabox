@@ -10,17 +10,17 @@ require 'tempfile'
 require 'json'
 require 'tilt/erb'
 
-module Geminabox
+module HetznerGeminabox
 
   class Error < StandardError ; end
   class AlreadyLocked < Error ; end
 
-  require_relative 'geminabox/version'
-  require_relative 'geminabox/proxy'
-  require_relative 'geminabox/http_adapter'
+  require_relative 'hetzner_geminabox/version'
+  require_relative 'hetzner_geminabox/proxy'
+  require_relative 'hetzner_geminabox/http_adapter'
 
   def self.geminabox_path(file)
-    File.join File.dirname(__FILE__), 'geminabox', file
+    File.join File.dirname(__FILE__), 'hetzner_geminabox', file
   end
 
   autoload :Hostess,                geminabox_path('hostess')

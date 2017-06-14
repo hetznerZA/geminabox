@@ -1,5 +1,5 @@
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     class FileHandler
 
@@ -15,7 +15,7 @@ module Geminabox
       end
 
       def root_path
-        Geminabox.data
+        HetznerGeminabox.data
       end
 
       def local_file_exists?
@@ -43,14 +43,14 @@ module Geminabox
       end
 
       def remote_content
-        Geminabox.http_adapter.get_content(remote_url).force_encoding(encoding)
+        HetznerGeminabox.http_adapter.get_content(remote_url).force_encoding(encoding)
       rescue
-        return nil if Geminabox.allow_remote_failure
+        return nil if HetznerGeminabox.allow_remote_failure
         raise GemStoreError.new(500, "Unable to get content from #{remote_url}")
       end
 
       def remote_url
-        URI.join(Geminabox.ruby_gems_url, file_name)
+        URI.join(HetznerGeminabox.ruby_gems_url, file_name)
       end
 
       def local_content

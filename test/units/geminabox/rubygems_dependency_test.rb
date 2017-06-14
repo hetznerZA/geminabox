@@ -1,12 +1,12 @@
 require_relative '../../test_helper'
 require 'json'
-module Geminabox
+module HetznerGeminabox
 
   class RubyGemDependencyTest < Minitest::Test
 
     def teardown
-      Geminabox.http_adapter = HttpClientAdapter.new
-      Geminabox.allow_remote_failure = false
+      HetznerGeminabox.http_adapter = HttpClientAdapter.new
+      HetznerGeminabox.allow_remote_failure = false
     end
 
     def test_get_list
@@ -36,7 +36,7 @@ module Geminabox
     def test_get_list_with_socket_error
       http_adapter = HttpSocketErrorDummy.new
       http_adapter.default_response = 'getaddrinfo: Name or service not known'
-      Geminabox.http_adapter = http_adapter
+      HetznerGeminabox.http_adapter = http_adapter
       assert_raises SocketError do
         RubygemsDependency.for(:some_gem, :other_gem)
       end
@@ -46,7 +46,7 @@ module Geminabox
       stub_request(:get, "https://bundler.rubygems.org/api/v1/dependencies?gems=some_gem,other_gem").
         to_return(:status => 500, :body => 'Whoops')
 
-      Geminabox.allow_remote_failure = true
+      HetznerGeminabox.allow_remote_failure = true
       assert_equal [], RubygemsDependency.for(:some_gem, :other_gem)
     end
 
@@ -54,15 +54,15 @@ module Geminabox
       stub_request(:get, "https://bundler.rubygems.org/api/v1/dependencies?gems=some_gem,other_gem").
         to_return(:status => 401, :body => 'Whoops')
 
-      Geminabox.allow_remote_failure = true
+      HetznerGeminabox.allow_remote_failure = true
       assert_equal [], RubygemsDependency.for(:some_gem, :other_gem)
     end
 
     def test_get_list_with_socket_error_and_allow_remote_failure
       http_adapter = HttpSocketErrorDummy.new
       http_adapter.default_response = 'getaddrinfo: Name or service not known'
-      Geminabox.http_adapter = http_adapter
-      Geminabox.allow_remote_failure = true
+      HetznerGeminabox.http_adapter = http_adapter
+      HetznerGeminabox.allow_remote_failure = true
       assert_equal [], RubygemsDependency.for(:some_gem, :other_gem)
     end
 

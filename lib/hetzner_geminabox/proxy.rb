@@ -1,5 +1,5 @@
 
-module Geminabox
+module HetznerGeminabox
   module Proxy
     def self.proxy_path(file)
       File.join File.dirname(__FILE__), 'proxy', file

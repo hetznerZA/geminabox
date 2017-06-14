@@ -2,7 +2,7 @@ require_relative '../../test_helper'
 require 'httpclient'
 require 'set'
 
-class DependenciesApiTest < Geminabox::TestCase
+class DependenciesApiTest < HetznerGeminabox::TestCase
   test "push a gem with dependencies" do
     cache_fixture_data_dir "a_gem_with_deps" do
       assert_can_push(:a, :deps => [[:b, '>= 0']])

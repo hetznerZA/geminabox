@@ -1,23 +1,23 @@
 require_relative '../../test_helper'
 
-class PathTest < Geminabox::TestCase
+class PathTest < HetznerGeminabox::TestCase
   url "http://localhost/foo"
 
   app do
     map "/foo" do
-      run Geminabox::Server
+      run HetznerGeminabox::Server
     end
   end
 
   should_push_gem
 end
 
-class PathWithTrailingSlashTest < Geminabox::TestCase
+class PathWithTrailingSlashTest < HetznerGeminabox::TestCase
   url "http://localhost/foo/"
 
   app do
     map "/foo" do
-      run Geminabox::Server
+      run HetznerGeminabox::Server
     end
   end
 

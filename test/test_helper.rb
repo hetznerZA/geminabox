@@ -31,7 +31,7 @@ class Minitest::Test
   def clean_data_dir
     FileUtils.rm_rf(TEST_DATA_DIR)
     FileUtils.mkdir(TEST_DATA_DIR)
-    Geminabox.data = TEST_DATA_DIR
+    HetznerGeminabox.data = TEST_DATA_DIR
   end
 
   def self.fixture(path)
@@ -62,8 +62,8 @@ class Minitest::Test
 
   def inject_gems(&block)
     silence do
-      yield GemFactory.new(File.join(Geminabox.data, "gems"))
-      Gem::Indexer.new(Geminabox.data).generate_index
+      yield GemFactory.new(File.join(HetznerGeminabox.data, "gems"))
+      Gem::Indexer.new(HetznerGeminabox.data).generate_index
     end
   end
 

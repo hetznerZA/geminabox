@@ -1,6 +1,6 @@
 require 'httpclient'
 
-module Geminabox
+module HetznerGeminabox
 
   class HttpClientAdapter < HttpAdapter
 

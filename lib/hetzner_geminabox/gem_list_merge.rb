@@ -1,4 +1,4 @@
-module Geminabox
+module HetznerGeminabox
   class GemListMerge
     attr_accessor :list
 
