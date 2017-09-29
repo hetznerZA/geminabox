@@ -1,3 +1,3 @@
 module HetznerGeminabox
-  VERSION = '0.14.0' unless defined? VERSION
+  VERSION = '0.14.1' unless defined? VERSION
 end

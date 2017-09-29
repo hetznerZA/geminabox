@@ -18,6 +18,7 @@ module HetznerGeminabox
   require_relative 'hetzner_geminabox/version'
   require_relative 'hetzner_geminabox/proxy'
   require_relative 'hetzner_geminabox/http_adapter'
+  require_relative 'hetzner_geminabox/indexer'
 
   def self.geminabox_path(file)
     File.join File.dirname(__FILE__), 'hetzner_geminabox', file
